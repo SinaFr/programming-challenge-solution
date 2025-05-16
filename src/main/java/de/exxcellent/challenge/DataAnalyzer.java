@@ -19,7 +19,7 @@ public class DataAnalyzer {
      */
     public static String findLabelWithSmallestSpread(DataFile file) throws IOException {
         /* Extract the label column and the columns to compare */
-        List<List<String>> columnList = DataReader.extractColumns(file);
+        List<List<String>> columnList = CsvReader.extractColumns(file);
 
         /*
          * Extract the last two columns, as the label column is not relevant for the
@@ -31,7 +31,7 @@ public class DataAnalyzer {
         }
 
         /* Calculate the index of the row with the smallest spread */
-        int rowIdx = SpreadCalculator.getIdxWithSmallestDiff(columnsToCompare);
+        int rowIdx = SmallestSpreadCalculator.getIdxWithSmallestDiff(columnsToCompare);
         if (rowIdx == -1) {
             System.out.println("File is empty or contains no valid data.");
             return null;

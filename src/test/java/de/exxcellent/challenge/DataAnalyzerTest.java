@@ -28,8 +28,8 @@ public class DataAnalyzerTest {
     public void findLabelWithSmallestSpread_whenEmptyFile_thenPropagatesIOException() throws IOException {
         DataFile file = new DataFile("fake/path.csv", "Day", List.of("MxT", "MnT"));
 
-        try (MockedStatic<DataReader> mocked = mockStatic(DataReader.class)) {
-            mocked.when(() -> DataReader.extractColumns(file))
+        try (MockedStatic<CsvReader> mocked = mockStatic(CsvReader.class)) {
+            mocked.when(() -> CsvReader.extractColumns(file))
                     .thenThrow(new IOException("Simulates IO-Exception"));
 
             assertThrows(IOException.class,

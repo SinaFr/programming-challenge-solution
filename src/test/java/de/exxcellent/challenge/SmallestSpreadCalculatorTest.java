@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-public class SpreadCalculatorTest {
+public class SmallestSpreadCalculatorTest {
 
     @Test
     public void getIdxWithSmallestDiff_whenValidColumns_thenReturnsValidIdx() {
@@ -44,7 +44,7 @@ public class SpreadCalculatorTest {
                 Arrays.asList("88", "66"),
                 Arrays.asList("90", "45"));
 
-        Integer rowIdx = SpreadCalculator.getIdxWithSmallestDiff(columns);
+        Integer rowIdx = SmallestSpreadCalculator.getIdxWithSmallestDiff(columns);
         assertEquals(13, rowIdx);
     }
 
@@ -54,7 +54,7 @@ public class SpreadCalculatorTest {
         List<List<String>> columns = Arrays.asList(
                 Arrays.asList("88", "89"));
 
-        Integer rowIdx = SpreadCalculator.getIdxWithSmallestDiff(columns);
+        Integer rowIdx = SmallestSpreadCalculator.getIdxWithSmallestDiff(columns);
         assertEquals(0, rowIdx);
     }
 
@@ -65,7 +65,7 @@ public class SpreadCalculatorTest {
                 Arrays.asList("81", "71"),
                 Arrays.asList("90", "75"));
 
-        Integer rowIdx = SpreadCalculator.getIdxWithSmallestDiff(columns);
+        Integer rowIdx = SmallestSpreadCalculator.getIdxWithSmallestDiff(columns);
         assertEquals(0, rowIdx);
     }
 
@@ -74,7 +74,7 @@ public class SpreadCalculatorTest {
 
         List<List<String>> columns = Arrays.asList();
 
-        Integer rowIdx = SpreadCalculator.getIdxWithSmallestDiff(columns);
+        Integer rowIdx = SmallestSpreadCalculator.getIdxWithSmallestDiff(columns);
         assertEquals(-1, rowIdx);
     }
 
@@ -87,7 +87,7 @@ public class SpreadCalculatorTest {
                 Arrays.asList("77", "55"),
                 Arrays.asList("77", "76"));
 
-        Integer rowIdx = SpreadCalculator.getIdxWithSmallestDiff(columns);
+        Integer rowIdx = SmallestSpreadCalculator.getIdxWithSmallestDiff(columns);
         assertEquals(3, rowIdx);
     }
 
@@ -100,7 +100,7 @@ public class SpreadCalculatorTest {
                 Arrays.asList("77", "55"),
                 Arrays.asList("77", ""));
 
-        Integer rowIdx = SpreadCalculator.getIdxWithSmallestDiff(columns);
+        Integer rowIdx = SmallestSpreadCalculator.getIdxWithSmallestDiff(columns);
         assertEquals(2, rowIdx);
     }
 }
