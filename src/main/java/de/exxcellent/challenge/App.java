@@ -15,16 +15,16 @@ public final class App {
     public static void main(String... args) throws Exception {
         DataReader reader = new CsvReader();
         SpreadCalculator calculator = new SmallestSpreadCalculator();
-        DataAnalyzer analyzer = new DataAnalyzer(reader, calculator);
+        DataAnalyzer analyzer = new SmallestSpreadAnalyzer(reader, calculator);
 
         DataFile weatherFile = new DataFile(BASE_PATH + "/weather.csv", "Day",
                 Arrays.asList("MxT", "MnT"));
-        String day = analyzer.findLabelWithSmallestSpread(weatherFile);
+        String day = analyzer.findLabelOfRelevantRow(weatherFile);
         System.out.println("Day with smallest temperature spread: " + day);
 
         DataFile footballFile = new DataFile(BASE_PATH + "/football.csv", "Team",
                 Arrays.asList("Goals", "Goals Allowed"));
-        String team = analyzer.findLabelWithSmallestSpread(footballFile);
+        String team = analyzer.findLabelOfRelevantRow(footballFile);
         System.out.println("Team with smallest goal spread: " + team);
     }
 }

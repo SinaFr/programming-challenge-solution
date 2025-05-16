@@ -9,20 +9,29 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-public class DataAnalyzerTest {
+public class SmallestSpreadAnalyzerTest {
 
     private static final String BASE_PATH = "src/test/resources/de/exxcellent/challenge/";
     DataReader reader = new CsvReader();
     SpreadCalculator calculator = new SmallestSpreadCalculator();
-    DataAnalyzer analyzer = new DataAnalyzer(reader, calculator);
+    DataAnalyzer analyzer = new SmallestSpreadAnalyzer(reader, calculator);
 
     @Test
-    public void findLabelWithSmallestSpread_whenValidFile_thenReturnsValidLabel() throws Exception {
+    public void findLabelWithSmallestSpread_whenValidWeatherFile_thenReturnsValidLabel() throws Exception {
         DataFile weatherFile = new DataFile(BASE_PATH + "/weatherValid.csv", "Day",
                 Arrays.asList("MxT", "MnT"));
 
-        String label = analyzer.findLabelWithSmallestSpread(weatherFile);
+        String label = analyzer.findLabelOfRelevantRow(weatherFile);
         assertEquals("14", label);
+    }
+
+    @Test
+    public void findLabelWithSmallestSpread_whenValidFootballFile_thenReturnsValidLabel() throws Exception {
+        DataFile weatherFile = new DataFile(BASE_PATH + "/footballValid.csv", "Team",
+                Arrays.asList("Goals", "Goals Allowed"));
+
+        String label = analyzer.findLabelOfRelevantRow(weatherFile);
+        assertEquals("Aston_Villa", label);
     }
 
     @Test
@@ -30,12 +39,12 @@ public class DataAnalyzerTest {
         DataFile file = new DataFile("fake/path.csv", "Day", List.of("MxT", "MnT"));
         DataReader reader = org.mockito.Mockito.mock(DataReader.class);
         SpreadCalculator calculator = org.mockito.Mockito.mock(SpreadCalculator.class);
-        DataAnalyzer analyzer = new DataAnalyzer(reader, calculator);
+        DataAnalyzer analyzer = new SmallestSpreadAnalyzer(reader, calculator);
 
         org.mockito.Mockito.when(reader.extractColumns(file)).thenThrow(new IOException("Simulates IO-Exception"));
 
         assertThrows(IOException.class,
-                () -> analyzer.findLabelWithSmallestSpread(file),
+                () -> analyzer.findLabelOfRelevantRow(file),
                 "Expected IOException to be propagated from extractColumns");
     }
 
@@ -44,7 +53,7 @@ public class DataAnalyzerTest {
         DataFile weatherFile = new DataFile(BASE_PATH + "/weatherOnlyHeader.csv", "Day",
                 Arrays.asList("MxT", "MnT"));
 
-        String label = analyzer.findLabelWithSmallestSpread(weatherFile);
+        String label = analyzer.findLabelOfRelevantRow(weatherFile);
         assertEquals(null, label);
     }
 }
