@@ -1,4 +1,46 @@
-= eXXcellent programming challenge
+= eXXcellent programming challenge solution
+
+== Solution Overview
+
+This repository contains a clean, extensible, and maintainable solution for the programming challenge. The final implementation is based on a modular and abstracted architecture that supports both the weather and football tasks described in the challenge. Step 2 of the challenge starts with commit 49a2eb4ae4659b2d3d428efea5fe24cb57cdc1d9
+
+**Key Features:**
+- The solution is fully data-driven and can be easily extended to support new file formats or calculation logics.
+- All core logic is separated into well-defined components with clear responsibilities.
+- The code is robust, well-tested, and follows best practices for readability and maintainability.
+
+**Architecture Overview:**
+
+- **DataReader (Interface)**  
+  Abstraction for reading data from various sources (e.g., CSV, JSON).  
+  - `CsvReader`: Reads data from CSV files.  
+
+- **DataFile**  
+  Encapsulates file path, label column, and columns to compare.
+
+- **SpreadCalculator (Interface)**  
+  Abstraction for calculating the spread between two columns.  
+  - `SmallestSpreadCalculator`: Implements the logic to determine the smallest spread.
+
+- **DataAnalyzer**  
+  Abstraction for analyzing data files.  
+  - `SmallestSpreadAnalyzer`: Uses `DataReader` and `SpreadCalculator` to find the label with the smallest spread.
+
+- **App**  
+  Entry point of the application. Configures and runs the components for both weather and football problems.
+
+**Process:**
+1. The app creates concrete instances of `DataReader` and `SpreadCalculator` and passes them to `DataAnalyzer`.
+2. `DataAnalyzer` uses the `DataReader` to read the relevant data from the file.
+3. The `SpreadCalculator` calculates the index with the smallest spread.
+4. `DataAnalyzer` returns the corresponding label (e.g., day or team).
+
+=== How to Run
+
+Run the main method in `App.java` to solve both the weather and football problems. You can easily adapt the input files and columns for other, similar tasks.
+
+
+= eXXcellent programming challenge description
 
 This repository provides the project scaffold for a simple
 programming challenge. Though the challenge is very simple
