@@ -9,8 +9,10 @@ import org.junit.jupiter.api.Test;
 
 public class SmallestSpreadCalculatorTest {
 
+    SpreadCalculator calculator = new SmallestSpreadCalculator();
+
     @Test
-    public void getIdxWithSmallestDiff_whenValidColumns_thenReturnsValidIdx() {
+    public void findRowWithRelevantSpread_whenValidColumns_thenReturnsValidIdx() {
 
         List<List<String>> columns = Arrays.asList(
                 Arrays.asList("88", "59"),
@@ -44,42 +46,42 @@ public class SmallestSpreadCalculatorTest {
                 Arrays.asList("88", "66"),
                 Arrays.asList("90", "45"));
 
-        Integer rowIdx = SmallestSpreadCalculator.getIdxWithSmallestDiff(columns);
+        Integer rowIdx = calculator.findRowWithRelevantSpread(columns);
         assertEquals(13, rowIdx);
     }
 
     @Test
-    public void getIdxWithSmallestDiff_whenOnlyOneRow_thenReturnsIdxZero() {
+    public void findRowWithRelevantSpread_whenOnlyOneRow_thenReturnsIdxZero() {
 
         List<List<String>> columns = Arrays.asList(
                 Arrays.asList("88", "89"));
 
-        Integer rowIdx = SmallestSpreadCalculator.getIdxWithSmallestDiff(columns);
+        Integer rowIdx = calculator.findRowWithRelevantSpread(columns);
         assertEquals(0, rowIdx);
     }
 
     @Test
-    public void getIdxWithSmallestDiff_whenMultipleMinSpreads_thenReturnsFirstOccurrence() {
+    public void findRowWithRelevantSpread_whenMultipleMinSpreads_thenReturnsFirstOccurrence() {
         List<List<String>> columns = Arrays.asList(
                 Arrays.asList("80", "70"),
                 Arrays.asList("81", "71"),
                 Arrays.asList("90", "75"));
 
-        Integer rowIdx = SmallestSpreadCalculator.getIdxWithSmallestDiff(columns);
+        Integer rowIdx = calculator.findRowWithRelevantSpread(columns);
         assertEquals(0, rowIdx);
     }
 
     @Test
-    public void getIdxWithSmallestDiff_whenEmptyList_thenReturnsIdxMinusOne() {
+    public void findRowWithRelevantSpread_whenEmptyList_thenReturnsIdxMinusOne() {
 
         List<List<String>> columns = Arrays.asList();
 
-        Integer rowIdx = SmallestSpreadCalculator.getIdxWithSmallestDiff(columns);
+        Integer rowIdx = calculator.findRowWithRelevantSpread(columns);
         assertEquals(-1, rowIdx);
     }
 
     @Test
-    public void getIdxWithSmallestDiff_whenRowSizeTooSmall_thenSkipRow() {
+    public void findRowWithRelevantSpread_whenRowSizeTooSmall_thenSkipRow() {
 
         List<List<String>> columns = Arrays.asList(
                 Arrays.asList("88", "86"),
@@ -87,12 +89,12 @@ public class SmallestSpreadCalculatorTest {
                 Arrays.asList("77", "55"),
                 Arrays.asList("77", "76"));
 
-        Integer rowIdx = SmallestSpreadCalculator.getIdxWithSmallestDiff(columns);
+        Integer rowIdx = calculator.findRowWithRelevantSpread(columns);
         assertEquals(3, rowIdx);
     }
 
     @Test
-    public void getIdxWithSmallestDiff_whenInvalidValues_thenSkipRows() {
+    public void findRowWithRelevantSpread_whenInvalidValues_thenSkipRows() {
 
         List<List<String>> columns = Arrays.asList(
                 Arrays.asList(".", "86"),
@@ -100,7 +102,7 @@ public class SmallestSpreadCalculatorTest {
                 Arrays.asList("77", "55"),
                 Arrays.asList("77", ""));
 
-        Integer rowIdx = SmallestSpreadCalculator.getIdxWithSmallestDiff(columns);
+        Integer rowIdx = calculator.findRowWithRelevantSpread(columns);
         assertEquals(2, rowIdx);
     }
 }

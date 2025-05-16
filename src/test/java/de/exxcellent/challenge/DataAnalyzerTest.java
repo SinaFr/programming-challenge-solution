@@ -13,7 +13,8 @@ public class DataAnalyzerTest {
 
     private static final String BASE_PATH = "src/test/resources/de/exxcellent/challenge/";
     DataReader reader = new CsvReader();
-    DataAnalyzer analyzer = new DataAnalyzer(reader);
+    SpreadCalculator calculator = new SmallestSpreadCalculator();
+    DataAnalyzer analyzer = new DataAnalyzer(reader, calculator);
 
     @Test
     public void findLabelWithSmallestSpread_whenValidFile_thenReturnsValidLabel() throws Exception {
@@ -28,7 +29,8 @@ public class DataAnalyzerTest {
     public void findLabelWithSmallestSpread_whenEmptyFile_thenPropagatesIOException() throws IOException {
         DataFile file = new DataFile("fake/path.csv", "Day", List.of("MxT", "MnT"));
         DataReader reader = org.mockito.Mockito.mock(DataReader.class);
-        DataAnalyzer analyzer = new DataAnalyzer(reader);
+        SpreadCalculator calculator = org.mockito.Mockito.mock(SpreadCalculator.class);
+        DataAnalyzer analyzer = new DataAnalyzer(reader, calculator);
 
         org.mockito.Mockito.when(reader.extractColumns(file)).thenThrow(new IOException("Simulates IO-Exception"));
 

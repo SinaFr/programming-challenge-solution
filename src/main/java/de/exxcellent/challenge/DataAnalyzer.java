@@ -10,9 +10,11 @@ import java.util.List;
 public class DataAnalyzer {
 
     private final DataReader reader;
+    private final SpreadCalculator calculator;
 
-    public DataAnalyzer(DataReader reader) {
+    public DataAnalyzer(DataReader reader, SpreadCalculator calculator) {
         this.reader = reader;
+        this.calculator = calculator;
     }
 
     /**
@@ -37,7 +39,7 @@ public class DataAnalyzer {
         }
 
         /* Calculate the index of the row with the smallest spread */
-        int rowIdx = SmallestSpreadCalculator.getIdxWithSmallestDiff(columnsToCompare);
+        int rowIdx = calculator.findRowWithRelevantSpread(columnsToCompare);
         if (rowIdx == -1) {
             System.out.println("File is empty or contains no valid data.");
             return null;

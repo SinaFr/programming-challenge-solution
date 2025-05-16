@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * This class is responsible for calculating the smallest spread between values.
  */
-public class SmallestSpreadCalculator {
+public class SmallestSpreadCalculator implements SpreadCalculator {
     /**
      * Calculates the row with the smallest difference between the two given columns
      * and returns the index of that row. If there are multiple minimum spreads, the
@@ -15,8 +15,8 @@ public class SmallestSpreadCalculator {
      *                considered.
      * @return The index of the row with the smallest difference.
      */
-
-    public static Integer getIdxWithSmallestDiff(List<List<String>> columns) {
+    @Override
+    public Integer findRowWithRelevantSpread(List<List<String>> columns) {
         int smallestDiff = Integer.MAX_VALUE;
         int rowIdx = -1;
         for (int i = 0; i < columns.size(); i++) {
@@ -43,4 +43,5 @@ public class SmallestSpreadCalculator {
         }
         return rowIdx;
     }
+
 }

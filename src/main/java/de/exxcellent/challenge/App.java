@@ -14,7 +14,8 @@ public final class App {
      */
     public static void main(String... args) throws Exception {
         DataReader reader = new CsvReader();
-        DataAnalyzer analyzer = new DataAnalyzer(reader);
+        SpreadCalculator calculator = new SmallestSpreadCalculator();
+        DataAnalyzer analyzer = new DataAnalyzer(reader, calculator);
 
         DataFile weatherFile = new DataFile(BASE_PATH + "/weather.csv", "Day",
                 Arrays.asList("MxT", "MnT"));
