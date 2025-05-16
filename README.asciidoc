@@ -2,34 +2,31 @@
 
 == Solution Overview
 
-This repository contains a clean, extensible, and maintainable solution for the programming challenge. The final implementation is based on a modular and abstracted architecture that supports both the weather and football tasks described in the challenge. Step 2 of the challenge starts with commit 49a2eb4ae4659b2d3d428efea5fe24cb57cdc1d9
+This repository contains a clean, extensible, and maintainable solution for the programming challenge. The final implementation is based on a modular and abstracted architecture that supports both the weather and football tasks described in the challenge. Step 2 of the challenge starts with commit 49a2eb4.
 
 **Key Features:**
+
 - The solution is fully data-driven and can be easily extended to support new file formats or calculation logics.
 - All core logic is separated into well-defined components with clear responsibilities.
 - The code is robust, well-tested, and follows best practices for readability and maintainability.
 
 **Architecture Overview:**
 
-- **DataReader (Interface)**  
-  Abstraction for reading data from various sources (e.g., CSV, JSON).  
-  - `CsvReader`: Reads data from CSV files.  
+- `DataReader` (Interface): Abstraction for reading data from various sources (e.g., CSV, JSON).
+- `CsvReader`: Reads data from CSV files.
 
-- **DataFile**  
-  Encapsulates file path, label column, and columns to compare.
+- `DataFile`: Encapsulates file path, label column, and columns to compare.
 
-- **SpreadCalculator (Interface)**  
-  Abstraction for calculating the spread between two columns.  
-  - `SmallestSpreadCalculator`: Implements the logic to determine the smallest spread.
+- `SpreadCalculator` (Interface): Abstraction for calculating the spread between two columns.
+- `SmallestSpreadCalculator`: Implements the logic to determine the smallest spread.
 
-- **DataAnalyzer**  
-  Abstraction for analyzing data files.  
-  - `SmallestSpreadAnalyzer`: Uses `DataReader` and `SpreadCalculator` to find the label with the smallest spread.
+- `DataAnalyzer` (Interface): Abstraction for analyzing data files.
+- `SmallestSpreadAnalyzer`: Uses `DataReader` and `SpreadCalculator` to find the label with the smallest spread.
 
-- **App**  
-  Entry point of the application. Configures and runs the components for both weather and football problems.
+- `App`: Entry point of the application. Configures and runs the components for both weather and football problems.
 
 **Process:**
+
 1. The app creates concrete instances of `DataReader` and `SpreadCalculator` and passes them to `DataAnalyzer`.
 2. `DataAnalyzer` uses the `DataReader` to read the relevant data from the file.
 3. The `SpreadCalculator` calculates the index with the smallest spread.
@@ -39,7 +36,6 @@ This repository contains a clean, extensible, and maintainable solution for the 
 
 Run the main method in `App.java` to solve both the weather and football problems. You can easily adapt the input files and columns for other, similar tasks.
 
-
 = eXXcellent programming challenge description
 
 This repository provides the project scaffold for a simple
@@ -48,21 +44,20 @@ and a rather synthetic use-case, your results are a helpful
 starting point to discuss your programming flavor, skills
 and methodology.
 
-**BEFORE STARTING:** Please take the time and read this 
-document completely and carefully! It describes important 
+**BEFORE STARTING:** Please take the time and read this
+document completely and carefully! It describes important
 parts of the challenge.
-
 
 == Goal
 
 Implement a solution for the given tasks which aims for
 
-* robustness & correctness
-* readability & maintainability
-* clean software design & architecture
+- robustness & correctness
+- readability & maintainability
+- clean software design & architecture
 
 Be prepared to discuss your implementation and software design
-decisions. Show us how you would solve the task when working on your day-to-day 
+decisions. Show us how you would solve the task when working on your day-to-day
 job.
 
 Feel free to come up with own ideas & solutions. There is no plain
@@ -70,44 +65,40 @@ Feel free to come up with own ideas & solutions. There is no plain
 about _how_ you achieved your goal and about your thoughts and design
 idea and process.
 
-
-
 == Tasks
 
 === Time estimation
-Between ~1.5 hour up to ~4 hours,  +
+Between ~1.5 hour up to ~4 hours, +
 depending on your previous experience & development environment.
 
 === Task
 
 Weather::
-    In `weather.csv` you’ll find the daily weather data of a single month.
-    Read the file, then output the day number (column one `Day`) of the day with
-    the smallest temperature spread (difference between maximum &
-    minimum temperature of the day.)
-    The maximum temperature is the second column `MxT`, the minimum
-    temperature the third column `MnT`.
+In `weather.csv` you’ll find the daily weather data of a single month.
+Read the file, then output the day number (column one `Day`) of the day with
+the smallest temperature spread (difference between maximum &
+minimum temperature of the day.)
+The maximum temperature is the second column `MxT`, the minimum
+temperature the third column `MnT`.
 
 Football::
-    The `football.csv` file contains results of the
-    English Premier League. The columns labeled ‘Goals’
-    and ‘Goals Allowed’ contain the total number of goals scored
-    by and against each team (so Arsenal scored
-    79 goals themselves and had 36 goals scored against them).
-    Read the file, then print the name of the team with the smallest
-    distance (absolute difference) between ‘Goals’ and ‘Goals Allowed’.
+The `football.csv` file contains results of the
+English Premier League. The columns labeled ‘Goals’
+and ‘Goals Allowed’ contain the total number of goals scored
+by and against each team (so Arsenal scored
+79 goals themselves and had 36 goals scored against them).
+Read the file, then print the name of the team with the smallest
+distance (absolute difference) between ‘Goals’ and ‘Goals Allowed’.
 
-Task::
-    1. Try to write a single program, which is able to solve the "Weather" 
-       challenge. 
-    2. Then try to refactor & extend your solution, that it additionally
-       supports the Football challenge. 
+Task:: 1. Try to write a single program, which is able to solve the "Weather"
+challenge. 2. Then try to refactor & extend your solution, that it additionally
+supports the Football challenge.
 
 Process::
-* Favour the software design goals described under _Goal_ over other goals 
-  like _performance_ or _feature set_.
-* Try to follow a test-driven development approach.
 
+- Favour the software design goals described under _Goal_ over other goals
+  like _performance_ or _feature set_.
+- Try to follow a test-driven development approach.
 
 === Hints
 
@@ -156,17 +147,21 @@ To start
 ```
 git clone https://[gitlab|github].com/exxcellent/programming-challenge.git
 ```
+
 or if you've forked the repository then
+
 ```
 git clone git@[gitlab|github].com:YOURNAME/programming-challenge.git
 ```
 
 See what challenges are available by listing the branches present:
+
 ```
 git branch -a
 ```
 
 === Switch to the branch of the challenge assigned
+
 ```
 cd programming-challenge
 git checkout challenge-CHALLENGENAME
@@ -180,16 +175,16 @@ you are convenient with.
 After installing Maven 3.x you should be able to
 
 Build & test your project::
-    `mvn verify`
+`mvn verify`
 
 Then to run the main class _de.exxcellent.challenge.App_::
-    `mvn exec:java`
+`mvn exec:java`
 
 To remove the compilation output::
-    `mvn clean`
+`mvn clean`
 
 Or use your IDE functionality::
-    to run & debug you program.
+to run & debug you program.
 
 == Submitting your results
 
