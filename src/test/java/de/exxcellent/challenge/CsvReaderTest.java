@@ -15,14 +15,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CsvReaderTest {
 
         private static final String BASE_PATH = "src/test/resources/de/exxcellent/challenge/";
+        DataReader reader = new CsvReader();
 
         @Test
-        public void extractColumns_whenValidFile_thenReturnsValidColumns() throws Exception {
+        public void extractColumns_whenValidWeatherFile_thenReturnsValidColumns() throws Exception {
                 DataFile weatherFile = new DataFile(BASE_PATH + "/weatherValid.csv",
                                 "Day",
                                 Arrays.asList("MxT", "MnT"));
 
-                List<List<String>> columns = CsvReader.extractColumns(weatherFile);
+                List<List<String>> columns = reader.extractColumns(weatherFile);
                 List<List<String>> expectedColumns = Arrays.asList(
                                 Arrays.asList("1", "88", "59"),
                                 Arrays.asList("2", "79", "63"),
@@ -62,12 +63,47 @@ public class CsvReaderTest {
         }
 
         @Test
+        public void extractColumns_whenValidFootballFile_thenReturnsValidColumns() throws Exception {
+                DataFile weatherFile = new DataFile(BASE_PATH + "/footballValid.csv",
+                                "Team",
+                                Arrays.asList("Goals", "Goals Allowed"));
+
+                List<List<String>> columns = reader.extractColumns(weatherFile);
+                List<List<String>> expectedColumns = Arrays.asList(
+                                Arrays.asList("Arsenal", "79", "36"),
+                                Arrays.asList("Liverpool", "67", "30"),
+                                Arrays.asList("Manchester United", "87", "45"),
+                                Arrays.asList("Newcastle", "74", "52"),
+                                Arrays.asList("Leeds", "53", "37"),
+                                Arrays.asList("Chelsea", "66", "38"),
+                                Arrays.asList("West_Ham", "48", "57"),
+                                Arrays.asList("Aston_Villa", "46", "47"),
+                                Arrays.asList("Tottenham", "49", "53"),
+                                Arrays.asList("Blackburn", "55", "51"),
+                                Arrays.asList("Southampton", "46", "54"),
+                                Arrays.asList("Middlesbrough", "35", "47"),
+                                Arrays.asList("Fulham", "36", "44"),
+                                Arrays.asList("Charlton", "38", "49"),
+                                Arrays.asList("Everton", "45", "57"),
+                                Arrays.asList("Bolton", "44", "62"),
+                                Arrays.asList("Sunderland", "29", "51"),
+                                Arrays.asList("Ipswich", "41", "64"),
+                                Arrays.asList("Derby", "33", "63"),
+                                Arrays.asList("Leicester", "30", "64"));
+
+                assertNotNull(columns);
+                assertFalse(columns.isEmpty());
+                assertEquals(3, columns.get(0).size());
+                assertEquals(expectedColumns, columns);
+        }
+
+        @Test
         public void extractColumns_whenEmptyFile_thenPropagatesIOException() {
                 DataFile weatherFile = new DataFile(BASE_PATH + "/emptyFile.csv", "Day",
                                 Arrays.asList("MxT", "MnT"));
 
                 IOException exception = assertThrows(IOException.class, () -> {
-                        CsvReader.extractColumns(weatherFile);
+                        reader.extractColumns(weatherFile);
                 });
 
                 assertTrue(exception.getMessage().contains("CSV file is empty"),
@@ -80,7 +116,7 @@ public class CsvReaderTest {
                                 Arrays.asList("MxT", "MnT"));
 
                 IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-                        CsvReader.extractColumns(weatherFile);
+                        reader.extractColumns(weatherFile);
                 });
 
                 assertTrue(exception.getMessage().contains("Missing required fields in CSV header"),
@@ -93,7 +129,7 @@ public class CsvReaderTest {
                                 Arrays.asList("MxT", "MnT"));
 
                 IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-                        CsvReader.extractColumns(weatherFile);
+                        reader.extractColumns(weatherFile);
                 });
 
                 assertTrue(exception.getMessage().contains("Missing required fields in CSV header"),
@@ -106,7 +142,7 @@ public class CsvReaderTest {
                                 Arrays.asList("MxT", "MnT"));
 
                 IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-                        CsvReader.extractColumns(weatherFile);
+                        reader.extractColumns(weatherFile);
                 });
 
                 assertTrue(exception.getMessage().contains("Missing required fields in CSV header"),
@@ -118,7 +154,7 @@ public class CsvReaderTest {
                 DataFile weatherFile = new DataFile(BASE_PATH + "/weatherMissingValues.csv", "Day",
                                 Arrays.asList("MxT", "MnT"));
 
-                List<List<String>> columns = CsvReader.extractColumns(weatherFile);
+                List<List<String>> columns = reader.extractColumns(weatherFile);
                 List<List<String>> expectedColumns = Arrays.asList(
                                 Arrays.asList("2", "79", "63"),
                                 Arrays.asList("4", "77", "59"));
@@ -133,7 +169,7 @@ public class CsvReaderTest {
                                 Arrays.asList("MxT", "MnT"));
 
                 IOException exception = assertThrows(IOException.class, () -> {
-                        CsvReader.extractColumns(weatherFile);
+                        reader.extractColumns(weatherFile);
                 });
 
                 assertTrue(exception.getMessage().contains("Failed to parse CSV file"),

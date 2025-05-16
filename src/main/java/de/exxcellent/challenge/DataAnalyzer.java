@@ -9,6 +9,12 @@ import java.util.List;
  */
 public class DataAnalyzer {
 
+    private final DataReader reader;
+
+    public DataAnalyzer(DataReader reader) {
+        this.reader = reader;
+    }
+
     /**
      * Calcualtes the row with the smallest spread between two specific columns in
      * the given data file and returns the label of that row.
@@ -17,9 +23,9 @@ public class DataAnalyzer {
      * @return The label of the row with the smallest spread.
      * @throws IOException If an error occurs while reading the file.
      */
-    public static String findLabelWithSmallestSpread(DataFile file) throws IOException {
+    public String findLabelWithSmallestSpread(DataFile file) throws IOException {
         /* Extract the label column and the columns to compare */
-        List<List<String>> columnList = CsvReader.extractColumns(file);
+        List<List<String>> columnList = reader.extractColumns(file);
 
         /*
          * Extract the last two columns, as the label column is not relevant for the

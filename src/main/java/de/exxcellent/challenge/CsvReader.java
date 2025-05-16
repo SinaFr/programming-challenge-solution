@@ -15,17 +15,17 @@ import com.opencsv.exceptions.CsvValidationException;
 /**
  * This class is responsible for reading CSV files.
  */
-public class CsvReader {
-
+public class CsvReader implements DataReader {
     /**
      * Reads a CSV file and extracts the specified columns.
      *
-     * @param file The file to read.
+     * @param file The data file to read.
      * @return A list of lists, where each inner list contains the values of the
      *         specified columns for a single row.
      * @throws IOException If an error occurs while reading the file.
      */
-    public static List<List<String>> extractColumns(DataFile file) throws IOException {
+    @Override
+    public List<List<String>> extractColumns(DataFile file) throws IOException {
         String path = file.getPath();
         String labelCol = file.getLabelCol();
         List<String> colsToCompare = file.getColsToCompare();
